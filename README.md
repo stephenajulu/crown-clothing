@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> A ReactJS ecommerce clothing store
+> A ReactJS x Firebase ecommerce clothing store
 
 ## Install
 
