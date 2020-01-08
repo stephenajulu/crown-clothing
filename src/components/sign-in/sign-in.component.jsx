@@ -52,10 +52,14 @@ class SignIn extends React.Component {
                     handleChange={this.handleChange}
                     required />
 
-                    <CustomButton type='submit' value='Submit'> Sign in </CustomButton>
-                    <CustomButton 
-                    onClick={signInWithGoogle}
-                    > Sign in with google </CustomButton>
+                    <div className='buttons'>
+                        <CustomButton type='submit' value='Submit'> Sign in </CustomButton>
+                        <CustomButton 
+                        onClick={signInWithGoogle}
+                        isGoogleSignIn
+                        > Sign in with google </CustomButton>
+                    </div>
+                    
                 </form>
             </div>
         )
