@@ -8,7 +8,7 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import AuthPage from './pages/auth/auth.component';
 
-import { auth, createUserProfileDocment } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 
 class App extends React.Component {
@@ -24,7 +24,7 @@ class App extends React.Component {
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        const userRef = await createUserProfileDocment(userAuth);
+        const userRef = await createUserProfileDocument(userAuth);
 
         // .onSnapshot() checks if the snapshot has changed, returns the snapshot object
         userRef.onSnapshot(snapshot => {
