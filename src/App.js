@@ -26,11 +26,12 @@ class App extends React.Component {
       if (userAuth) {
         const userRef = await createUserProfileDocment(userAuth);
 
+        // .onSnapshot() checks if the snapshot has changed, returns the snapshot object
         userRef.onSnapshot(snapshot => {
           this.setState({
             currentUser: {
               id: snapshot.id,
-              ...snapshot.data()
+              ...snapshot.data() // displayName, createdAt and email since to get object representing the values yyou will use the .data() method
             }
           });
         });
