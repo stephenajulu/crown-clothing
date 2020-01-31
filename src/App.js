@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './App.css';
 
@@ -9,36 +10,31 @@ import Header from './components/header/header.component';
 import AuthPage from './pages/auth/auth.component';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { setCurrentUser } from './redux/user/user.action';
 
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      currentUser: null
-    }
-  }
-
+  
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         // .onSnapshot() checks if the snapshot has changed, returns the snapshot object
         userRef.onSnapshot(snapshot => {
-          this.setState({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data() // displayName, createdAt and email since to get object representing the values yyou will use the .data() method
-            }
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data() 
           });
         });
       }
       
       // set to null if the current user is logged out
-      this.setState({currentUser: userAuth});
+      setCurrentUser({userAuth});
     });
   }
 
@@ -60,4 +56,8 @@ class App extends React.Component {
   }  
 }
 
-export default App;
+const matchDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, matchDispatchToProps)(App);
