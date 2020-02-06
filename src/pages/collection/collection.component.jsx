@@ -8,10 +8,12 @@ import { selectCollection } from '../../redux/shop/shop.selectors';
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
 const CollectionPage = ({ match, collection }) => (
-  <div className='category'>
+  <div className='collection'>
     <h2>{match.params.collectionId.toUpperCase()}</h2>
     {
-      console.log(collection)
+      collection.items.map(item => (
+        <CollectionItem key={item.id} item={item} />
+      ))
     }
   </div>
 );
