@@ -15,6 +15,7 @@ const Directory = ({ sections }) => (
         <MenuItem key={id} {...otherSectionProps} />
       ))
     }
+    <span className='footer'>Copyright &copy; 2020</span>
   </div>
 );
 
