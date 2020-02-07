@@ -13,7 +13,7 @@ const StripeCheckoutButton = ({ price }) => {
 
   return (
     <StripeCheckout
-    lable='Pay Now'
+    label='Pay Now'
     name='Crown Clothing'
     billingAddress
     shippingAddress
