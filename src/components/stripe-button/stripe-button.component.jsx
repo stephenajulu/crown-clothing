@@ -1,9 +1,13 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect'
+
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import './stripe-button.styles.scss';
 
-const StripeCheckoutButton = ({ price }) => {
+const StripeCheckoutButton = ({ price, currentUser }) => {
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_DX93HOnXHRWGxo1tMxHlecNj00MZV1t0MS';
   const onToken = token => {
@@ -23,8 +27,13 @@ const StripeCheckoutButton = ({ price }) => {
     panelLabel='Pay Now'
     token={onToken}
     stripeKey={publishableKey}
+    disabled={!currentUser}
     />
   )
 }
 
-export default StripeCheckoutButton;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+});
+
+export default connect(mapStateToProps)(StripeCheckoutButton);
