@@ -22,7 +22,7 @@ const StripeCheckoutButton = ({ price }) => {
     amount={priceForStripe}
     panelLabel='Pay Now'
     token={onToken}
-    publishableKey={publishableKey}
+    stripeKey={publishableKey}
     />
   )
 }
