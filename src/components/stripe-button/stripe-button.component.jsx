@@ -17,7 +17,7 @@ const StripeCheckoutButton = ({ price, currentUser }) => {
 
   return (
     <StripeCheckout
-    label='Pay Now'
+    label={currentUser ? 'Pay Now' : 'You need to sign in to pay'}
     name='Crown Clothing'
     billingAddress
     shippingAddress
@@ -27,7 +27,7 @@ const StripeCheckoutButton = ({ price, currentUser }) => {
     panelLabel='Pay Now'
     token={onToken}
     stripeKey={publishableKey}
-    disabled={!currentUser}
+    disabled={!currentUser || price === 0}
     />
   )
 }
