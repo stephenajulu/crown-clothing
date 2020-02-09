@@ -11,6 +11,15 @@
 
 > A ReactJS x Firebase ecommerce clothing store
 
+## Technologies used
+- React DOM
+- React Redux
+- React Router
+- React Styled Components
+- React Stripe Checkout
+- Firebase
+
+
 ## Install
 
 ```sh
