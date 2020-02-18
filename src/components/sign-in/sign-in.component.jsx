@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './sign-in.styles.scss';
+import { SignInContainer } from './sign-in.styles';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -45,7 +45,7 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div className='sign-in'>
+      <SignInContainer>
         <h2 className='title'>I already have an account</h2>
         <span className='title'>Sign in with your email and password</span>
 
@@ -75,7 +75,7 @@ class SignIn extends React.Component {
           </div>
 
         </form>
-      </div>
+      </SignInContainer>
     )
   }
 
