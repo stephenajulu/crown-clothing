@@ -58,6 +58,23 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   return await batch.commit();
 }
 
+
+// function to get collection snapshot nd convert it to object/ map
+export const convertCollectionSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    return {
+      id: doc.id,
+      title,
+      items,
+      routeName: encodeURI(title.toLowerCase())
+    }
+  });
+
+  console.log(transformedCollection);
+};
+
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({
   'prompt': 'select_account'
