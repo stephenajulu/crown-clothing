@@ -72,7 +72,11 @@ export const convertCollectionSnapshotToMap = collections => {
     }
   });
 
-  console.log(transformedCollection);
+  // converting array to object with .reduce()
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection; // setting key/ property
+    return accumulator; // setting map
+  }, {});
 };
 
 const provider = new firebase.auth.GoogleAuthProvider();
