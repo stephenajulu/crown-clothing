@@ -6,7 +6,6 @@ import { updateCollections } from '../../redux/shop/shop.actions'
 
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
 import CollectionPage from '../collection/collection.component';
-import NoMatchPage from '../404/404.component';
 
 import { firestore, convertCollectionSnapshotToMap } from '../../firebase/firebase.utils';
 
@@ -31,7 +30,6 @@ class ShopPage extends React.Component {
       <div className='shop-page'>
         <Route exact path={`${match.path}`} component={CollectionsOverview} />
         <Route exact path={`${match.path}/:collectionId`} component={CollectionPage} />
-        <Route component={NoMatchPage} />
       </div>
     );
   }
