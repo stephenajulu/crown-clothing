@@ -7,8 +7,6 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import { clearAllCartItems } from '../../redux/cart/cart.action';
 
-import './stripe-button.styles.scss';
-
 const StripeCheckoutButton = ({ price, currentUser, dispatch }) => {
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_DX93HOnXHRWGxo1tMxHlecNj00MZV1t0MS';
