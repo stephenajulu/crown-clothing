@@ -24,6 +24,11 @@ const invertedButtonStyles = css`
   }
 `;
 
+const disabledButtonStyles = css`
+  background-color: #dddddd;
+  cursor: default;
+`;
+
 const googleSignInStyles = css`
   background-color: #4285f4;
   color: white;
@@ -37,6 +42,8 @@ const googleSignInStyles = css`
 const getButtonStyles = props => {
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
+  } else if (props.disabled) {
+    return disabledButtonStyles;
   }
   return props.inverted ? invertedButtonStyles : buttonStyles;
 };
