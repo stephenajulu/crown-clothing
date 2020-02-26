@@ -7,6 +7,8 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import { clearAllCartItems } from '../../redux/cart/cart.action';
 
+import CustomButton from '../custom-button/custom-button.component';
+
 const StripeCheckoutButton = ({ price, currentUser, dispatch }) => {
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_DX93HOnXHRWGxo1tMxHlecNj00MZV1t0MS';
@@ -18,7 +20,7 @@ const StripeCheckoutButton = ({ price, currentUser, dispatch }) => {
 
   return (
     <StripeCheckout
-    label={currentUser ? 'Pay Now' : 'You need to sign in to pay'}
+    
     name='Crown Clothing'
     billingAddress
     shippingAddress
@@ -28,8 +30,16 @@ const StripeCheckoutButton = ({ price, currentUser, dispatch }) => {
     panelLabel='Pay Now'
     token={onToken}
     stripeKey={publishableKey}
-    disabled={!currentUser || price === 0}
-    />
+    
+    >
+      <CustomButton 
+      disabled={!currentUser || price === 0}
+      >
+        {
+          currentUser ? 'Pay Now' : 'You need to sign in to pay'
+        }
+      </CustomButton>
+    </StripeCheckout>
   )
 }
 
