@@ -12,6 +12,11 @@ export const selectShopCollectionItems = createSelector(
   shop => shop.collections
 );
 
+export const selectErrorMessage = createSelector(
+  [selectShop],
+  shop => shop.errorMessage
+);
+
 export const selectCollection = collectionUrlParam => (
   createSelector(
     [selectShopCollectionItems],
