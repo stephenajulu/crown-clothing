@@ -40,7 +40,7 @@ class App extends React.Component {
       // set to null if the current user is logged out
       setCurrentUser(userAuth);
 
-    });
+    }, error => console.log(error));
   }
 
   componentWillUnmount() {
