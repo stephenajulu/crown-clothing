@@ -9,9 +9,9 @@ export const SignInContainer = styled.div`
   .title {
       margin: 10px 0;
   }
+`;
 
-  .buttons {
-      display: flex;
-      justify-content: space-between;
-  }
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

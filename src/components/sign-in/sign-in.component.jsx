@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { SignInContainer } from './sign-in.styles';
+import { SignInContainer, ButtonsContainer } from './sign-in.styles';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -71,14 +71,14 @@ class SignIn extends React.Component {
             handleChange={this.handleChange}
             required />
 
-          <div className='buttons'>
+          <ButtonsContainer>
             <CustomButton type='submit' value='Submit'> Sign in </CustomButton>
             <CustomButton
               type='button'
               onClick={googleSignInStart}
               isGoogleSignIn
             > Sign in with google </CustomButton>
-          </div>
+          </ButtonsContainer>
 
         </form>
       </SignInContainer>
