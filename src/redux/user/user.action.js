@@ -21,3 +21,19 @@ export const signInFail = error => ({
   type: userActionTypes.SIGN_IN_FAIL,
   payload: error
 });
+
+// EMAIL SIGN UP
+export const emailSignUpStart = emailPasswordAndDisplayName => ({
+  type: userActionTypes.EMAIL_SIGN_UP_START,
+  payload: emailPasswordAndDisplayName
+});
+
+export const emailSignUpSuccess = user => ({
+  type: userActionTypes.EMAIL_SIGN_UP_SUCCESS,
+  payload: user
+});
+
+export const emailSignUpFail = error => ({
+  type: userActionTypes.EMAIL_SIGN_UP_FAIL,
+  payload: error
+});

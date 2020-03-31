@@ -4,7 +4,7 @@ import { auth, googleProvider, createUserProfileDocument } from '../../firebase/
 
 import { userActionTypes } from './user.types';
 
-import { signInSuccess, signInFail } from './user.action';
+import { signInSuccess, signInFail, emailSignUpSuccess, emailSignUpFail } from './user.action';
 
 
 export function* getSnapShotFromAuth(userAuth) {
@@ -39,9 +39,9 @@ export function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapShotFromAuth(user);
+    yield put(emailSignUpSuccess(user));
   } catch (error) {
-    alert('Login Failed!');
-    yield put(signInFail(error));
+    yield put(emailSignUpFail(error));
   }
 }
 
@@ -49,10 +49,27 @@ export function* onEmailSignInStart() {
   yield takeLatest(userActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
+// EMAIL SIGN-UP
+export function* signUpWithEmail({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield call(createUserProfileDocument, user, { displayName });
+    yield put(emailSignUpSuccess(user));
+  } catch (error) {
+    console.error(error);
+    yield put(emailSignUpFail(error));
+  }
+}
+
+export function* onEmailSignUpStart() {
+  yield takeLatest(userActionTypes.EMAIL_SIGN_UP_START, signUpWithEmail);
+}
+
 // TO ROOT SAGA
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
-    call(onEmailSignInStart)
+    call(onEmailSignInStart),
+    call(onEmailSignUpStart)
   ]);
 }
