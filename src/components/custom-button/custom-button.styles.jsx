@@ -40,11 +40,50 @@ const googleSignInStyles = css`
   }
 `;
 
+const buttonLoader = css`
+  background-color: black;
+  color: white;
+  border: none;
+  padding-right: 40px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    right: 6px;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    margin-top: -2px;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-left-color: #333;
+    border-top-color: #333;
+    animation: spin .6s infinite linear, grow .3s forwards ease-out;
+  }
+
+  @keyframes spin { 
+    to {
+        transform: rotate(359deg);
+    }
+  }
+
+  @keyframes grow { 
+    to {
+        width: 14px;
+        height: 14px;
+        margin-top: -8px;
+        right: 73px;
+    }
+  }
+`;
+
 const getButtonStyles = props => {
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
   } else if (props.disabled) {
     return disabledButtonStyles;
+  } else if (props.loading) {
+    return buttonLoader;
   }
   return props.inverted ? invertedButtonStyles : buttonStyles;
 };
@@ -63,6 +102,7 @@ export const CustomButtonContainer = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
+  position: relative;
 
   ${getButtonStyles}
 `;
