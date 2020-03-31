@@ -1,5 +1,10 @@
 import { userActionTypes } from './user.types';
 
+// CHECK USER SESSION
+export const checkUserSession = () => ({
+  type: userActionTypes.CHECK_USER_SESSION
+});
+
 // GOOGLE
 export const googleSignInStart = () => ({
   type: userActionTypes.GOOGLE_SIGN_IN_START
