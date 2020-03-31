@@ -12,7 +12,6 @@ import AuthPage from './pages/auth/auth.component';
 import CheckOutPage from './pages/checkout/checkout.component';
 import NoMatchPage from './pages/404/404.component';
 
-import { setCurrentUser } from './redux/user/user.action';
 import { selectCurrentUser } from './redux/user/user.selectors'
 
 
@@ -21,7 +20,6 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    // const { setCurrentUser } = this.props;
 
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
@@ -73,8 +71,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
 
-const matchDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
-
-export default connect(mapStateToProps, matchDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
