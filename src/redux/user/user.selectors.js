@@ -12,3 +12,8 @@ export const selectIsSigningIn = createSelector(
   [selectUser],
   user => user.signingIn
 );
+
+export const selectIsSigningUp = createSelector(
+  [selectUser],
+  user => user.signingUp
+);

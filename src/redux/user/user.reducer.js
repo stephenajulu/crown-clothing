@@ -3,11 +3,18 @@ import { userActionTypes } from './user.types';
 const INITIAL_STATE = {
   currentUser: null,
   error: null,
-  signingIn: false
+  signingIn: false,
+  signingUp: false
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case userActionTypes.EMAIL_SIGN_UP_START:
+      return {
+        ...state,
+        signingUp: true
+      }
+
     case userActionTypes.EMAIL_SIGN_IN_START:
       return {
         ...state,
@@ -20,7 +27,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: action.payload,
         error: null,
-        signingIn: false
+        signingIn: false,
+        signingUp: false
       }
     
     case userActionTypes.SIGN_IN_FAIL:

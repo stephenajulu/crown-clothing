@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -7,6 +8,8 @@ import CustomButton from '../custom-button/custom-button.component';
 import { emailSignUpStart } from '../../redux/user/user.action';
 
 import { SignUpContainer } from './sign-up.styles';
+
+import { selectIsSigningUp } from '../../redux/user/user.selectors';
 
 class SignUp extends React.Component {
   constructor() {
@@ -47,6 +50,7 @@ class SignUp extends React.Component {
   render() {
 
     const { displayName, email, password, confirmPassword } = this.state;
+    const { isSigningUp } = this.props;
 
     return (
       <SignUpContainer>
@@ -89,7 +93,7 @@ class SignUp extends React.Component {
             required />
 
 
-          <CustomButton type='submit'>SIGN UP</CustomButton>
+          <CustomButton type='submit' loading={isSigningUp ? 'true' : 'false'}>{isSigningUp ? null : 'SIGN UP'}</CustomButton>
 
         </form>
 
@@ -98,8 +102,12 @@ class SignUp extends React.Component {
   }
 }
 
+const mapStateToProps = createStructuredSelector({
+  isSigningUp: selectIsSigningUp
+});
+
 const mapDispatchToProps = dispatch => ({
   emailSignUpStart: (email, password, displayName) => dispatch(emailSignUpStart({ email, password, displayName }))
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
