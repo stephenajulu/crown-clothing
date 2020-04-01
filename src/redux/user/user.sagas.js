@@ -7,6 +7,7 @@ import { userActionTypes } from './user.types';
 import { signInSuccess, signInFail, 
         emailSignUpSuccess, emailSignUpFail, 
         signOutSuccess, signOutFail } from './user.action';
+import { clearAllCartItems } from '../cart/cart.action';
 
 // REUSABLE UTIL
 export function* getSnapShotFromAuth(userAuth) {
@@ -92,8 +93,13 @@ export function* signOut() {
   }
 }
 
+export function* clearCart() {
+  yield put(clearAllCartItems());
+}
+
 export function* onSignOutStart() {
   yield takeLatest(userActionTypes.SIGN_OUT_START, signOut);
+  yield takeLatest(userActionTypes.SIGN_OUT_START, clearCart);
 }
 
 // TO ROOT SAGA LISTENER CHAIN
