@@ -42,3 +42,17 @@ export const emailSignUpFail = error => ({
   type: userActionTypes.EMAIL_SIGN_UP_FAIL,
   payload: error
 });
+
+// SIGN OUT
+export const signOutStart = () => ({
+  type: userActionTypes.SIGN_OUT_START
+});
+
+export const signOutSuccess = () => ({
+  type: userActionTypes.SIGN_OUT_SUCCESS
+});
+
+export const signOutFail = error => ({
+  type: userActionTypes.SIGN_OUT_SUCCESS,
+  payload: error
+});

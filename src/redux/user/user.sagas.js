@@ -4,7 +4,9 @@ import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from 
 
 import { userActionTypes } from './user.types';
 
-import { signInSuccess, signInFail, emailSignUpSuccess, emailSignUpFail } from './user.action';
+import { signInSuccess, signInFail, 
+        emailSignUpSuccess, emailSignUpFail, 
+        signOutSuccess, signOutFail } from './user.action';
 
 // REUSABLE UTIL
 export function* getSnapShotFromAuth(userAuth) {
@@ -80,12 +82,27 @@ export function* onCheckUserSession() {
   yield takeLatest(userActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
 
-// TO ROOT SAGA
+// SIGN OUT
+export function* signOut() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch(error) {
+    yield put(signOutFail(error));
+  }
+}
+
+export function* onSignOutStart() {
+  yield takeLatest(userActionTypes.SIGN_OUT_START, signOut);
+}
+
+// TO ROOT SAGA LISTENER CHAIN
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onEmailSignUpStart),
-    call(onCheckUserSession)
+    call(onCheckUserSession),
+    call(onSignOutStart)
   ]);
 }
