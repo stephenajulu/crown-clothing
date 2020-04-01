@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { SignInContainer, ButtonsContainer } from './sign-in.styles';
 
@@ -7,6 +8,7 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { googleSignInStart, emailSignInStart } from  '../../redux/user/user.action';
+import { selectIsSigningIn } from '../../redux/user/user.selectors';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -32,7 +34,7 @@ class SignIn extends React.Component {
 
 
   render() {
-    const { googleSignInStart } = this.props;
+    const { googleSignInStart, isSigningIn } = this.props;
 
     return (
       <SignInContainer>
@@ -57,7 +59,7 @@ class SignIn extends React.Component {
             required />
 
           <ButtonsContainer>
-            <CustomButton type='submit' value='Submit'> Sign in </CustomButton>
+            <CustomButton type='submit' value='Submit' loading={isSigningIn ? 'true': 'false'}> {isSigningIn ? null : 'Sign in'} </CustomButton>
             <CustomButton
               type='button'
               onClick={googleSignInStart}
@@ -72,9 +74,13 @@ class SignIn extends React.Component {
 
 }
 
+const mapStateToProps = createStructuredSelector({
+  isSigningIn: selectIsSigningIn
+});
+
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
   emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

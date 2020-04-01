@@ -82,7 +82,7 @@ const getButtonStyles = props => {
     return googleSignInStyles;
   } else if (props.disabled) {
     return disabledButtonStyles;
-  } else if (props.loading) {
+  } else if (props.loading === 'true') {
     return buttonLoader;
   }
   return props.inverted ? invertedButtonStyles : buttonStyles;
