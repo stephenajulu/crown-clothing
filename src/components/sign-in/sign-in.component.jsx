@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { SignInContainer, ButtonsContainer } from './sign-in.styles';
+import { SignInContainer, ButtonsContainer, Alert } from './sign-in.styles';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { googleSignInStart, emailSignInStart } from  '../../redux/user/user.action';
-import { selectIsSigningIn } from '../../redux/user/user.selectors';
+import { selectIsSigningIn, selectError } from '../../redux/user/user.selectors';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -34,13 +34,16 @@ class SignIn extends React.Component {
 
 
   render() {
-    const { googleSignInStart, isSigningIn } = this.props;
+    const { googleSignInStart, isSigningIn, error } = this.props;
 
     return (
       <SignInContainer>
         <h2 className='title'>I already have an account</h2>
         <span className='title'>Sign in with your email and password</span>
-
+        {
+          error ? <Alert>Invalid Email or Password</Alert>
+          : null
+        }
         <form onSubmit={this.handleSubmit}>
           <FormInput
             type='text'
@@ -75,7 +78,8 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isSigningIn: selectIsSigningIn
+  isSigningIn: selectIsSigningIn,
+  error: selectError
 });
 
 const mapDispatchToProps = dispatch => ({
