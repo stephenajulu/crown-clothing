@@ -37,7 +37,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: action.payload,
-        signingIn: false
+        signingIn: false,
+        signingUp: false
       }
 
     case userActionTypes.SIGN_OUT_SUCCESS:

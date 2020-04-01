@@ -55,8 +55,12 @@ export function* onEmailSignInStart() {
 export function* signUpWithEmail({ payload: { email, password, displayName } }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield call(createUserProfileDocument, user, { displayName });
-    yield put(emailSignUpSuccess(user));
+    const userRef = yield call(createUserProfileDocument, user, { displayName });
+    const snapShot = yield userRef.get();
+    yield put(emailSignUpSuccess({
+      id: snapShot.id,
+      ...snapShot.data()
+    }));
   } catch (error) {
     console.error(error);
     yield put(emailSignUpFail(error));
@@ -71,7 +75,7 @@ export function* onEmailSignUpStart() {
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
-    if (!userAuth) return; // user nver signed in before
+    if (!userAuth) return; // user never signed in before
     yield getSnapShotFromAuth(userAuth);
   } catch (error) {
     yield put(signInFail(error));
