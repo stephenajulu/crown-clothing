@@ -12,7 +12,7 @@
 > A ReactJS x Firebase ecommerce clothing store
 
 ## Technologies used
-React DOM, Router, Redux (sagas & thunks), Styled Components, Stripe and Firebase Firestore.
+React DOM, Router, Redux (sagas & thunks), Hooks, Styled Components, Stripe and Firebase Firestore.
 
 
 ## Install
