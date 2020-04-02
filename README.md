@@ -12,12 +12,7 @@
 > A ReactJS x Firebase ecommerce clothing store
 
 ## Technologies used
-- React DOM
-- React Redux
-- React Router
-- React Styled Components
-- React Stripe Checkout
-- Firebase
+React DOM, Router, Redux (sagas & thunks), Styled Components, Stripe and Firebase Firestore.
 
 
 ## Install
@@ -42,7 +37,7 @@ yarn run test
 
 👤 **Collins Muriuki**
 
-* [Website](https://muriuki.dev)
+* Website: https://muriuki.dev
 * Twitter: [@collinsmuriuki_](https://twitter.com/collinsmuriuki_)
 * Github: [@collinsmuriuki](https://github.com/collinsmuriuki)
 * LinkedIn: [@collinsmuriuki](https://linkedin.com/in/collinsmuriuki)
