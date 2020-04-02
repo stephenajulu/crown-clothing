@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -10,33 +10,16 @@ import CustomButton from '../custom-button/custom-button.component';
 import { googleSignInStart, emailSignInStart } from  '../../redux/user/user.action';
 import { selectIsSigningIn, selectError } from '../../redux/user/user.selectors';
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+const SignIn = ({ emailSignInStart, isSigningIn, error }) => {
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
 
-    this.state = {
-      email: '',
-      password: ''
-    }
-  }
-
-  handleSubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const { emailSignInStart } = this.props;
-    const { email, password } = this.state;
     emailSignInStart(email, password);
   }
 
-  handleChange = e => {
-    const { value, name } = e.target;
-    this.setState({ [name]: value });
-  }
-
-
-  render() {
-    const { googleSignInStart, isSigningIn, error } = this.props;
-
-    return (
+  return (
       <SignInContainer>
         <h2 className='title'>I already have an account</h2>
         <span className='title'>Sign in with your email and password</span>
@@ -44,13 +27,13 @@ class SignIn extends React.Component {
           error ? <Alert>Invalid Email or Password</Alert>
           : null
         }
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <FormInput
             type='text'
             name='email'
             value={this.state.email}
             label='Email'
-            handleChange={this.handleChange}
+            handleChange={e => setEmail(e.target.value)}
             required />
 
           <FormInput
@@ -58,7 +41,7 @@ class SignIn extends React.Component {
             name='password'
             value={this.state.password}
             label='Password'
-            handleChange={this.handleChange}
+            handleChange={e => setPassword(e.target.value)}
             required />
 
           <ButtonsContainer>
@@ -72,8 +55,7 @@ class SignIn extends React.Component {
 
         </form>
       </SignInContainer>
-    )
-  }
+  )
 
 }
 
