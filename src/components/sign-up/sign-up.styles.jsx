@@ -9,3 +9,7 @@ export const SignUpContainer = styled.div`
       margin: 10px 0;
   }
 `;
+
+export const Alert = styled.span`
+  color: red;
+`;

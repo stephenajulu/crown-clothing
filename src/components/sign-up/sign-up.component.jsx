@@ -7,7 +7,7 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import { emailSignUpStart } from '../../redux/user/user.action';
 
-import { SignUpContainer } from './sign-up.styles';
+import { SignUpContainer, Alert } from './sign-up.styles';
 
 import { selectIsSigningUp } from '../../redux/user/user.selectors';
 
@@ -18,14 +18,15 @@ const SignUp = ({ emailSignUpStart, isSigningUp }) => {
     password: '',
     confirmPassword: ''
   });
-
+  const [ noPasswordMatch, setNoPasswordMatch ] = useState(false);
+  
   const { displayName, email, password, confirmPassword } = credentials;
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert('Passwords Do Not Match');
+      setNoPasswordMatch(true);
       return;
     }
     emailSignUpStart(email, password, displayName);
@@ -40,7 +41,11 @@ const SignUp = ({ emailSignUpStart, isSigningUp }) => {
     <SignUpContainer>
       <h2 className='title'> I do not have an account</h2>
       <span>Sign up with your email and password</span>
-
+      {
+        noPasswordMatch ? (
+      <Alert>Passwords do not match!</Alert>
+        ) : null
+      }
       <form
         onSubmit={handleSubmit}
         className='sign-up-form'>
