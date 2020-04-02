@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -11,23 +11,18 @@ import { SignUpContainer } from './sign-up.styles';
 
 import { selectIsSigningUp } from '../../redux/user/user.selectors';
 
-class SignUp extends React.Component {
-  constructor() {
-    super();
+const SignUp = ({ emailSignUpStart, isSigningUp }) => {
+  const [ credentials, setCredentials ] = useState({
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
 
-    this.state = {
-      displayName: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }
-  }
+  const { displayName, email, password, confirmPassword } = credentials;
 
-  handleSubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-
-    const { displayName, email, password, confirmPassword } = this.state;
-    const { emailSignUpStart } = this.props;
 
     if (password !== confirmPassword) {
       alert('Passwords Do Not Match');
@@ -36,64 +31,58 @@ class SignUp extends React.Component {
     emailSignUpStart(email, password, displayName);
   }
 
-  handleChange = e => {
+  const handleChange = e => {
     const { value, name } = e.target;
-    this.setState({ [name]: value });
+    setCredentials({ ...credentials, [name]: value });
   }
 
-  render() {
+  return (
+    <SignUpContainer>
+      <h2 className='title'> I do not have an account</h2>
+      <span>Sign up with your email and password</span>
 
-    const { displayName, email, password, confirmPassword } = this.state;
-    const { isSigningUp } = this.props;
+      <form
+        onSubmit={handleSubmit}
+        className='sign-up-form'>
+        <FormInput
+          type='text'
+          name='displayName'
+          value={displayName}
+          handleChange={handleChange}
+          label='Display Name'
+          required />
 
-    return (
-      <SignUpContainer>
-        <h2 className='title'> I do not have an account</h2>
-        <span>Sign up with your email and password</span>
+        <FormInput
+          type='text'
+          name='email'
+          value={email}
+          handleChange={handleChange}
+          label='Email'
+          required />
 
-        <form
-          onSubmit={this.handleSubmit}
-          className='sign-up-form'>
-          <FormInput
-            type='text'
-            name='displayName'
-            value={displayName}
-            handleChange={this.handleChange}
-            label='Display Name'
-            required />
+        <FormInput
+          type='password'
+          name='password'
+          value={password}
+          handleChange={handleChange}
+          label='Password'
+          required />
 
-          <FormInput
-            type='text'
-            name='email'
-            value={email}
-            handleChange={this.handleChange}
-            label='Email'
-            required />
-
-          <FormInput
-            type='password'
-            name='password'
-            value={password}
-            handleChange={this.handleChange}
-            label='Password'
-            required />
-
-          <FormInput
-            type='password'
-            name='confirmPassword'
-            value={confirmPassword}
-            handleChange={this.handleChange}
-            label='Confirm Password'
-            required />
+        <FormInput
+          type='password'
+          name='confirmPassword'
+          value={confirmPassword}
+          handleChange={handleChange}
+          label='Confirm Password'
+          required />
 
 
-          <CustomButton type='submit' loading={isSigningUp ? 'true' : 'false'}>{isSigningUp ? null : 'SIGN UP'}</CustomButton>
+        <CustomButton type='submit' loading={isSigningUp ? 'true' : 'false'}>{isSigningUp ? null : 'SIGN UP'}</CustomButton>
 
-        </form>
+      </form>
 
-      </SignUpContainer>
-    )
-  }
+    </SignUpContainer>
+  )
 }
 
 const mapStateToProps = createStructuredSelector({
