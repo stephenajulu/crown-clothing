@@ -11,12 +11,17 @@ import { googleSignInStart, emailSignInStart } from  '../../redux/user/user.acti
 import { selectIsSigningIn, selectError } from '../../redux/user/user.selectors';
 
 const SignIn = ({ emailSignInStart, isSigningIn, error }) => {
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [ credentials, setCredentials ] = useState({ email: '', password:'' });
+  const { email, password } = credentials;
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+  const handleSubmit = async event => {
+    event.preventDefault();
     emailSignInStart(email, password);
+  }
+
+  const handleChange = event => {
+    const { value, name } = event.target;
+    setCredentials({ ...credentials, [name]: value });
   }
 
   return (
@@ -31,17 +36,17 @@ const SignIn = ({ emailSignInStart, isSigningIn, error }) => {
           <FormInput
             type='text'
             name='email'
-            value={this.state.email}
+            value={email}
             label='Email'
-            handleChange={e => setEmail(e.target.value)}
+            handleChange={handleChange}
             required />
 
           <FormInput
             type='password'
             name='password'
-            value={this.state.password}
+            value={password}
             label='Password'
-            handleChange={e => setPassword(e.target.value)}
+            handleChange={handleChange}
             required />
 
           <ButtonsContainer>
