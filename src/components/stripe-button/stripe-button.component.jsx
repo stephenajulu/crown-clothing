@@ -28,7 +28,7 @@ const StripeCheckoutButton = ({ price, currentUser, dispatch }) => {
     panelLabel='Pay Now'
     token={onToken}
     stripeKey={publishableKey}
-    disabled={!currentUser || price === 0}
+    disabled={!currentUser}
     />
   )
 }
