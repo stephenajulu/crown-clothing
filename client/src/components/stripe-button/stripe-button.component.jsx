@@ -23,7 +23,7 @@ const StripeCheckoutButton = ({ price, currentUser, dispatch }) => {
       alert('Payment successful');
       dispatch(clearAllCartItems());
     }).catch(error => {
-      console.log('Payment error', JSON.parse(error));
+      console.log('Payment error', error.toString());
       alert('There was an issue with your payment, please use the provided test credit card');
     });
   }
