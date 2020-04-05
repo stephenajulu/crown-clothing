@@ -1,7 +1,8 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
@@ -11,9 +12,20 @@ const StripeCheckoutButton = ({ price, currentUser, dispatch }) => {
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_DX93HOnXHRWGxo1tMxHlecNj00MZV1t0MS';
   const onToken = token => {
-    console.log(token);
-    alert('Payment Successful');
-    dispatch(clearAllCartItems());
+    axios({
+      url: 'payment',
+      method: 'post',
+      data: {
+        amount: priceForStripe,
+        token
+      }
+    }).then(response => {
+      alert('Payment successful');
+      dispatch(clearAllCartItems());
+    }).catch(error => {
+      console.log('Payment error', JSON.parse(error));
+      alert('There was an issue with your payment, please use the provided test credit card');
+    });
   }
 
   return (
