@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
+import Spinner from '../../components/spinner/spinner.component';
+
 const CollectionPageContainer = lazy(() => import('../../pages/collection/collection.container'));
 const CollectionsOverviewContainer = lazy(() => import('../../components/collections-overview/collectons-overview.container'))
 
@@ -14,7 +16,7 @@ const ShopPage = ({ fetchCollectionsStart, match }) => {
 
   return (
     <div className='shop-page'>
-      <Suspense fallback={<div style={{textAlign: 'center'}}>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Route exact path={`${match.path}`} component={CollectionsOverviewContainer} />
         <Route exact path={`${match.path}/:collectionId`} component={CollectionPageContainer} />
       </Suspense>
