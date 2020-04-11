@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 3600;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
