@@ -26,6 +26,23 @@ export const CollectionItemContainer = styled.div`
       display: flex;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+
+    &:hover {
+      .image {
+        opacity: unset;
+      }
+    }
+
+    button {
+      opacity: 0.9;
+      display: block;
+      min-width: unset;
+      padding: 0 10px;
+    }
+  }
 `;
 
 export const CollectionImageContainer = styled.div`
