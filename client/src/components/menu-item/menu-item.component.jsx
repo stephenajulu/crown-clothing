@@ -4,11 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { MenuItemContainer, BackGroundImage, ContentContainer } from './menu-item.styles';
 
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
-  <MenuItemContainer className={`${size}`}>
+  <MenuItemContainer size={size}>
 
-    <BackGroundImage className='background-image' style={{
-      backgroundImage: `url(${imageUrl})`
-    }} />
+    <BackGroundImage imageUrl={imageUrl} className='background-image' />
 
     <ContentContainer onClick={() => history.push(`${match.url}${linkUrl}`)} >
       <div className='title'>{title.toUpperCase()}</div>
