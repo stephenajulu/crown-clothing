@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { NoMatchPageContainer } from './404.styles';
+import { ErrorImageContainer, ErrorImageOverlay, ErrorImageText } from './404.styles';
 
 const NoMatchPage = () => (
-    <NoMatchPageContainer>
-        <h1>Page Not Found!</h1>
-    </NoMatchPageContainer>
+    <ErrorImageOverlay>
+        <ErrorImageContainer imageUrl='https://i.imgur.com/A040Lxr.png' />
+        <ErrorImageText>Oops, something went wrong!</ErrorImageText>
+    </ErrorImageOverlay>
 );
 
 export default NoMatchPage;
