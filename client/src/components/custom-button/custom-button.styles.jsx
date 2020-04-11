@@ -105,7 +105,7 @@ export const CustomButtonContainer = styled.button`
   position: relative;
 
   @media screen and (max-width: 800px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   ${getButtonStyles}

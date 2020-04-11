@@ -9,7 +9,7 @@ export const AuthContainer = styled.div`
   @media screen and (max-width: 800px) {
     flex-direction: column;
     width: unset;
-    aligh-items: center;
+    align-items: center;
 
     > *:first-child {
       margin-bottom: 50px;
