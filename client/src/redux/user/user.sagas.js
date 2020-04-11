@@ -41,9 +41,8 @@ export function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapShotFromAuth(user);
-    yield put(emailSignUpSuccess(user));
-  } catch (error) {
-    yield put(emailSignUpFail(error));
+  } catch(error) {
+    yield put(signInFail(error));
   }
 }
 
