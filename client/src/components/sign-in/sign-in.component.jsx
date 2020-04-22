@@ -50,7 +50,12 @@ const SignIn = ({ emailSignInStart, isSigningIn, error }) => {
             required />
 
           <ButtonsContainer>
-            <CustomButton type='submit' value='Submit' loading={isSigningIn ? 'true': 'false'}> {isSigningIn ? null : 'Sign in'} </CustomButton>
+            <CustomButton 
+              type='submit' 
+              value='Submit' 
+              loading={isSigningIn ? 'true': 'false'}
+            > {isSigningIn ? null : 'Sign in'} 
+            </CustomButton>
             <CustomButton
               type='button'
               onClick={googleSignInStart}
